@@ -3,7 +3,7 @@ server:
 
 spring:  
   application:
-  name: piomin-account-service
+  name: piomin-customer-service
   
 security:
   basic:
