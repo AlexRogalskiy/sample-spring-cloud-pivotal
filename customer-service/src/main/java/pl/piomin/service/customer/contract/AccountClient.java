@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import pl.piomin.service.customer.model.Account;
 
-@FeignClient("piomin-account-service")
+@FeignClient(value = "piomin-account-service", fallback = AccountFallback.class)
 public interface AccountClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/accounts/customer/{customerId}")
