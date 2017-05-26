@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.piomin.service.customer.contract.AccountClient;
 import pl.piomin.service.customer.model.Account;
 import pl.piomin.service.customer.model.Customer;
 import pl.piomin.service.customer.model.CustomerType;
+import pl.piomin.service.customer.service.AccountService;
 
 @RestController
 public class CustomerController {
 	
 	@Autowired
-	private AccountClient accountClient;
+	private AccountService accountService;
 	
 	protected Logger logger = Logger.getLogger(CustomerController.class.getName());
 	
@@ -48,7 +48,7 @@ public class CustomerController {
 	public Customer findById(@PathVariable("id") Integer id) {
 		logger.info(String.format("Customer.findById(%s)", id));
 		Customer customer = customers.stream().filter(it -> it.getId().intValue()==id.intValue()).findFirst().get();
-		List<Account> accounts =  accountClient.getAccounts(id);
+		List<Account> accounts =  accountService.getAccounts(id);
 		customer.setAccounts(accounts);
 		return customer;
 	}

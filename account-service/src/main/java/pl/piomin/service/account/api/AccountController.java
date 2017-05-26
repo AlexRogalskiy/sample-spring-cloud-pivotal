@@ -2,6 +2,7 @@ package pl.piomin.service.account.api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,15 @@ public class AccountController {
 	@RequestMapping("/accounts/customer/{customer}")
 	public List<Account> findByCustomer(@PathVariable("customer") Integer customerId) {
 		logger.info(String.format("Account.findByCustomer(%s)", customerId));
+		Random r = new Random();
+		int rr = r.nextInt(4);
+		if (rr == 1) {
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		return accounts.stream().filter(it -> it.getCustomerId().intValue() == customerId.intValue())
 				.collect(Collectors.toList());
 	}
